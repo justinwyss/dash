@@ -18,8 +18,6 @@ class ConfigureAddWidget extends React.Component {
        aggDatetime:      false,
        aggMethod:        '(undefined)',
        metrics:          ['(undefined)','(undefined)'],
-       //tabStartDateISO:  moment().toISOString(),
-       //tabEndDateISO:    moment().toISOString(),
        myStartDateISO:   moment().toISOString(),
        myEndDateISO:     moment().toISOString(),
        filters:          [],
@@ -36,8 +34,6 @@ class ConfigureAddWidget extends React.Component {
        aggDatetime:      false,
        aggMethod:        '(undefined)',
        metrics:          ['(undefined)','(undefined)'],
-       //tabStartDateISO:  moment().toISOString(),
-       //tabEndDateISO:    moment().toISOString(),
        myStartDateISO:   moment().toISOString(),
        myEndDateISO:     moment().toISOString(),
        filters:          [],
@@ -54,8 +50,6 @@ class ConfigureAddWidget extends React.Component {
        aggDatetime:      false,
        aggMethod:        '(undefined)',
        metrics:          ['(undefined)','(undefined)'],
-       //tabStartDateISO:  moment().toISOString(),
-       //tabEndDateISO:    moment().toISOString(),
        myStartDateISO:   moment().toISOString(),
        myEndDateISO:     moment().toISOString(),
        filters:          [],
@@ -72,8 +66,6 @@ class ConfigureAddWidget extends React.Component {
        aggDatetime:      false,
        aggMethod:        '(undefined)',
        metrics:          ['(undefined)','(undefined)'],
-       //tabStartDateISO:  moment().toISOString(),
-       //tabEndDateISO:    moment().toISOString(),
        myStartDateISO:   moment().toISOString(),
        myEndDateISO:     moment().toISOString(),
        filters:          [],
@@ -87,8 +79,6 @@ class ConfigureAddWidget extends React.Component {
        height:           'half',
        source:           '(undefined)',
        metrics:          ['(undefined)'],
-       //tabStartDateISO:  moment().toISOString(),
-       //tabEndDateISO:    moment().toISOString(),
        myStartDateISO:   moment().toISOString(),
        myEndDateISO:     moment().toISOString(),
        filters:          [],
@@ -102,8 +92,6 @@ class ConfigureAddWidget extends React.Component {
        height:           'half',
        source:           '(undefined)',
        metrics:          ['(undefined)','(undefined)'],
-       //tabStartDateISO:  moment().toISOString(),
-       //tabEndDateISO:    moment().toISOString(),
        myStartDateISO:   moment().toISOString(),
        myEndDateISO:     moment().toISOString(),
        filters:          [],
@@ -118,8 +106,6 @@ class ConfigureAddWidget extends React.Component {
        source:           '(undefined)',
        metrics:          ['(undefined)'],
        buckets:          '(undefined)',
-       //tabStartDateISO:  moment().toISOString(),
-       //tabEndDateISO:    moment().toISOString(),
        myStartDateISO:   moment().toISOString(),
        myEndDateISO:     moment().toISOString(),
        filters:          [],
@@ -141,7 +127,6 @@ class ConfigureAddWidget extends React.Component {
   }
   updateButtonHandler(i) {
     this.props.add_widget(this.state.configs[i]);
-    this.props.update_dash({configAddWidgetDisplay: 'none'});
   }
   render() {
     var thisthis = this;

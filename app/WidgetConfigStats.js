@@ -59,19 +59,19 @@ class WidgetConfigStats extends React.Component {
   }
   updateLayout() {
     var newDashLayout = calculateNewLayout(this.props.currentTab,this.props.dashLayout,this.props.widgetindex,Number(this.state.moveValue));
-    this.props.update_layout(newDashLayout);
     this.props.update_widget(this.props.widgetindex,{configDisplay: 'none'});
+    this.props.update_layout(newDashLayout);
   }
   updateWidget() {
     // Update the widget according to props.
-    this.props.update_widget(this.props.widgetindex,{
+    this.props.update_widget_plus_save(this.props.widgetindex,{
       configDisplay: 'none',
       source:        this.state.source,
       metrics:       this.state.metrics,
       timeframe:     this.state.timeframe,
       filters:       this.state.filters,
       width:         this.state.width,
-      height:        this.state.height            
+      height:        this.state.height
     });
   }
   cancelConfig() {
@@ -103,7 +103,7 @@ class WidgetConfigStats extends React.Component {
     metrics.unshift('(undefined)');
     return (
         <div style={{display: data.configDisplay}}>
-        <div className='deactivating-overlay'></div>        
+        <div className='deactivating-overlay'></div>
         <div className='widget-config-window'>
         <BorderTopPlusClose onClose={this.cancelConfig} title='Widget Configuration'/>
         <div className='bandsubtitle'>Choose Source & Metrics</div>
@@ -118,7 +118,7 @@ class WidgetConfigStats extends React.Component {
         <select onChange={this.selectMetricUpdate.bind(this,0)} value={this.state.metrics[0]}>
         {metrics.map(function(metric,i) {return (<option key={i} value={metric}>{metric}</option>)})}
       </select>
-        </div>      
+        </div>
         <div className='simpleborder'>
         Filters
         <SelectFilter selectFilterUpdate={this.selectFilterUpdate} options={metrics} filters={this.state.filters} />
@@ -127,7 +127,7 @@ class WidgetConfigStats extends React.Component {
         Time Frame
         <select onChange={this.selectTimeframeUpdate} value={this.state.timeframe}>
         {timeframeOptions.map(function(option,i) {return (<option key={i} value={option}>{option}</option>)})}
-      </select>        
+      </select>
         </div>
         <div className='simpleborder'>
         <SelectSize selectSizeUpdate={this.selectSizeUpdate} width={this.state.width} height={this.state.height} layout={props.dashLayout[props.currentTab].layout} widgetindex={props.widgetindex}/>
@@ -165,6 +165,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch,ownProps) => ({
   update_widget: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET',widgetindex:widgetindex,changes:changes}),
+  update_widget_plus_save: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET_PLUS_SAVE',widgetindex:widgetindex,changes:changes}),
   update_layout: (newLayout)           => dispatch({type: 'UPDATE_LAYOUT',newLayout:newLayout}),
   delete_widget: (widgetindex)         => dispatch({type: 'DELETE_WIDGET',widgetindex:widgetindex})
 })

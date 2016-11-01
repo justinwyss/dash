@@ -59,12 +59,12 @@ class WidgetConfigScatter extends React.Component {
   }
   updateLayout() {
     var newDashLayout = calculateNewLayout(this.props.currentTab,this.props.dashLayout,this.props.widgetindex,Number(this.state.moveValue));
-    this.props.update_layout(newDashLayout);
     this.props.update_widget(this.props.widgetindex,{configDisplay: 'none'});
+    this.props.update_layout(newDashLayout);
   }
   updateWidget() {
     // Update the widget according to props.
-    this.props.update_widget(this.props.widgetindex,{
+    this.props.update_widget_plus_save(this.props.widgetindex,{
       configDisplay: 'none',
       source:        this.state.source,
       metrics:       this.state.metrics,
@@ -171,6 +171,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch,ownProps) => ({
   update_widget: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET',widgetindex:widgetindex,changes:changes}),
+  update_widget_plus_save: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET_PLUS_SAVE',widgetindex:widgetindex,changes:changes}),
   update_layout: (newLayout)           => dispatch({type: 'UPDATE_LAYOUT',newLayout:newLayout}),
   delete_widget: (widgetindex)         => dispatch({type: 'DELETE_WIDGET',widgetindex:widgetindex})
 })

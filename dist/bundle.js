@@ -50,6 +50,8 @@
 
 	var _redux = __webpack_require__(42);
 
+	var _support = __webpack_require__(62);
+
 	var _Dashboard = __webpack_require__(59);
 
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
@@ -73,104 +75,149 @@
 	  //console.log('here:');
 	  //console.log(action);
 	  if (state === undefined) {
+	    /*
 	    state = {
-	      widgets: [{ key: 0,
-	        data: { type: 'pie',
-	          width: 'half',
-	          height: 'half',
-	          source: 'source01',
-	          aggNumeric: true,
-	          aggDatetime: true,
-	          aggMethod: 'mean',
-	          metrics: ['datetime', 'cost'],
-	          filters: [{ metric: 'age', comp: '<', value: '50' }],
-	          timeframe: 'mine',
-	          //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	          //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	          myStartDateISO: moment('2016-06-01T00:00:00').toISOString(),
-	          myEndDateISO: moment('2016-06-15T00:00:00').toISOString(),
-	          configDisplay: 'none' } }, { key: 1,
-	        data: { type: 'line',
-	          width: 'full',
-	          height: 'half',
-	          source: 'source01',
-	          aggNumeric: false,
-	          aggDatetime: true,
-	          aggMethod: 'mean',
-	          metrics: ['datetime', 'cost'],
-	          filters: [],
-	          timeframe: 'tab',
-	          //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	          //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	          myStartDateISO: moment().toISOString(),
-	          myEndDateISO: moment().toISOString(),
-	          configDisplay: 'none' } }, { key: 2,
-	        data: { type: 'histogram',
-	          width: 'half',
-	          height: 'half',
-	          source: 'source01',
-	          metrics: ['age'],
-	          buckets: 10,
-	          filters: [],
-	          timeframe: 'tab',
-	          //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	          //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	          myStartDateISO: moment().toISOString(),
-	          myEndDateISO: moment().toISOString(),
-	          configDisplay: 'none' } }, { key: 3,
-	        data: { type: 'scatter',
-	          width: 'half',
-	          height: 'half',
-	          source: 'source02',
-	          metrics: ['age', 'happiness'],
-	          filters: [],
-	          timeframe: 'none',
-	          //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	          //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	          myStartDateISO: moment().toISOString(),
-	          myEndDateISO: moment().toISOString(),
-	          configDisplay: 'none' } }, { key: 4,
-	        data: { type: 'stats',
-	          width: 'half',
-	          height: 'half',
-	          source: 'source02',
-	          metrics: ['happiness'],
-	          filters: [],
-	          timeframe: 'none',
-	          //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	          //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	          myStartDateISO: moment().toISOString(),
-	          myEndDateISO: moment().toISOString(),
-	          configDisplay: 'none' } }],
-	      dashLayout: [{ tabName: 'Justin',
-	        layout: [[0, 2], [1]],
-	        tabHideDate: true,
-	        tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
-	        tabEndDateISO: moment('2016-06-30T00:00:00').toISOString() }, { tabName: 'Stuart',
-	        layout: [[3, 4]],
-	        tabHideDate: false,
-	        tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
-	        tabEndDateISO: moment('2016-06-30T00:00:00').toISOString() }],
+	      widgets: [
+	        {key:  0,
+	         data: {type:             'pie',
+	                width:            'half',
+	                height:           'half',
+	                source:           'source01',
+	                aggNumeric:       true,
+	                aggDatetime:      true,
+	                aggMethod:        'mean',
+	                metrics:          ['datetime','cost'],
+	                filters:          [{metric:'age',comp:'<',value:'50'}],
+	                timeframe:        'mine',
+	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
+	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
+	                myStartDateISO:   moment('2016-06-01T00:00:00').toISOString(),
+	                myEndDateISO:     moment('2016-06-15T00:00:00').toISOString(),
+	                configDisplay:    'none'}},
+	        {key:  1,
+	         data: {type:             'line',
+	                width:            'full',
+	                height:           'half',
+	                source:           'source01',
+	                aggNumeric:       false,
+	                aggDatetime:      true,
+	                aggMethod:        'mean',
+	                metrics:          ['datetime','cost'],
+	                filters:          [],
+	                timeframe:        'tab',
+	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
+	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
+	                myStartDateISO:   moment().toISOString(),
+	                myEndDateISO:     moment().toISOString(),
+	                configDisplay:    'none'}},
+	        {key:  2,
+	         data: {type:             'histogram',
+	                width:            'half',
+	                height:           'half',
+	                source:           'source01',
+	                metrics:          ['age'],
+	                buckets:          10,
+	                filters:          [],
+	                timeframe:        'tab',
+	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
+	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
+	                myStartDateISO:   moment().toISOString(),
+	                myEndDateISO:     moment().toISOString(),
+	                configDisplay:    'none'}},
+	        {key:  3,
+	         data: {type:             'scatter',
+	                width:            'half',
+	                height:           'half',
+	                source:           'source02',
+	                metrics:          ['age','happiness'],
+	                filters:          [],
+	                timeframe:        'none',
+	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
+	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
+	                myStartDateISO:   moment().toISOString(),
+	                myEndDateISO:     moment().toISOString(),
+	                configDisplay:    'none'}},
+	        {key:  4,
+	         data: {type:             'stats',
+	                width:            'half',
+	                height:           'half',
+	                source:           'source02',
+	                metrics:          ['happiness'],
+	                filters:          [],
+	                timeframe:        'none',
+	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
+	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
+	                myStartDateISO:   moment().toISOString(),
+	                myEndDateISO:     moment().toISOString(),
+	                configDisplay:    'none'}}
+	      ],
+	      dashLayout: [{tabName:         'Justin',
+	                    layout:          [[0,2],[1]],
+	                    tabHideDate:     true,
+	                    tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
+	                    tabEndDateISO:   moment('2016-06-30T00:00:00').toISOString()},
+	                   {tabName:         'Stuart',
+	                    layout:          [[3,4]],
+	                    tabHideDate:     false,
+	                    tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
+	                    tabEndDateISO:   moment('2016-06-30T00:00:00').toISOString()},
+	                  ],
 	      currentTab: 0,
 	      configAddWidgetDisplay: 'none',
 	      configAddTabDisplay: 'none',
 	      configEditTabDisplay: 'none',
-	      dummy: true
+	      };
+	    */
+	    state = {
+	      did: 0, // This'll have to come from a log in thingy.
+	      widgets: [],
+	      dashLayout: [{ tabName: 'Default',
+	        layout: [],
+	        tabHideDate: true,
+	        tabStartDateISO: moment().toISOString(),
+	        tabEndDateISO: moment().toISOString() }],
+	      currentTab: 0,
+	      configAddWidgetDisplay: 'none',
+	      configAddTabDisplay: 'none',
+	      configEditTabDisplay: 'none'
 	    };
 	  }
+
 	  var newState = JSON.parse(JSON.stringify(state));
-	  // action.type === UPDATE_WIDGET then we also have:
-	  // action.widgetindex
-	  // action.changes
+	  ////////////////////////////////////////////////////////////////////////////////////////
+	  // UPDATE_WIDGET
+	  // UPDATE_WIDGET_PLUS_SAVE
+
 	  if (action.type === 'UPDATE_WIDGET') {
 	    newState.widgets[action.widgetindex].data = _.extend(newState.widgets[action.widgetindex].data, action.changes);
 	  }
+	  if (action.type === 'UPDATE_WIDGET_PLUS_SAVE') {
+	    newState.widgets[action.widgetindex].data = _.extend(newState.widgets[action.widgetindex].data, action.changes);
+	    (0, _support.saveDashboard)(newState);
+	  }
+
+	  ////////////////////////////////////////////////////////////////////////////////////////
+	  // UPDATE_DASH
+	  // UPDATE_DASH_PLUS_SAVE  
+
 	  if (action.type === 'UPDATE_DASH') {
 	    newState = _.extend(newState, action.changes);
 	    if (newState.currentTab >= newState.dashLayout.length) {
 	      newState.currentTab--;
 	    }
 	  }
+	  if (action.type === 'UPDATE_DASH_PLUS_SAVE') {
+	    newState = _.extend(newState, action.changes);
+	    if (newState.currentTab >= newState.dashLayout.length) {
+	      newState.currentTab--;
+	    }
+	    (0, _support.saveDashboard)(newState);
+	  }
+
+	  ////////////////////////////////////////////////////////////////////////////////////////
+	  // ADD_WIDGET
+	  // This always saves.
+
 	  if (action.type === 'ADD_WIDGET') {
 	    // Find a valid key.
 	    var validKey = 0;
@@ -184,7 +231,14 @@
 	    var windex = newState.widgets.length - 1;
 	    // Put the widget in the tab layout.
 	    newState.dashLayout[newState.currentTab].layout.push([windex]);
+	    newState.configAddWidgetDisplay = 'none';
+	    (0, _support.saveDashboard)(newState);
 	  }
+
+	  ////////////////////////////////////////////////////////////////////////////////////////
+	  // DELETE_WIDGET
+	  // This always saves.
+
 	  if (action.type === 'DELETE_WIDGET') {
 	    var indexToDelete = action.widgetindex;
 	    var currentLayout = newState.dashLayout[newState.currentTab].layout;
@@ -206,12 +260,32 @@
 	      });
 	    });
 	    newState.widgets.splice(indexToDelete, 1);
+	    (0, _support.saveDashboard)(newState);
 	  }
+
+	  ////////////////////////////////////////////////////////////////////////////////////////
+	  // UPDATE_LAYOUT
+	  // This always saves.
+
 	  if (action.type === 'UPDATE_LAYOUT') {
 	    newState.dashLayout = action.newLayout;
+	    (0, _support.saveDashboard)(newState);
 	  }
+
+	  ////////////////////////////////////////////////////////////////////////////////////////
+	  // CHANGE_CURRENT_TAB
+	  // This never saves.
+
 	  if (action.type === 'CHANGE_CURRENT_TAB') {
 	    newState.currentTab = action.newTab;
+	  }
+
+	  ////////////////////////////////////////////////////////////////////////////////////////
+	  // LOAD_DATA_INTO_DASHBOARD
+	  // This never saves.
+
+	  if (action.type === 'LOAD_DATA_INTO_DASHBOARD') {
+	    newState = action.statestring;
 	  }
 	  return newState;
 	};
@@ -220,21 +294,6 @@
 	// I guess it's passed the reducer to ... allow the reducer to access it or something?
 
 	var store = (0, _redux.createStore)(userReducer);
-
-	// Add one more thing for testing.
-
-	{} /*
-	   store.dispatch({type:'ADD_WIDGET',data: {type:             'column',
-	                                           source:           'source01',
-	                                           aggNumeric:       true,
-	                                           aggDatetime:      true,
-	                                           aggMethod:        'mean',
-	                                           metrics:          ['datetime','save'],
-	                                           filters:          [],
-	                                           configDisplay:    'none'
-	                                          }});
-	   */
-	// Now the app.
 
 	ReactDOM.render(React.createElement(_reactRedux.Provider, { store: store }, React.createElement(_Dashboard2.default, null)), document.getElementById('app'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -7571,7 +7630,7 @@
 /* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(_) {'use strict';
+	/* WEBPACK VAR INJECTION */(function($, _) {'use strict';
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -7608,6 +7667,8 @@
 	var _ConfigureEditTab = __webpack_require__(326);
 
 	var _ConfigureEditTab2 = _interopRequireDefault(_ConfigureEditTab);
+
+	var _support = __webpack_require__(62);
 
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -7661,6 +7722,22 @@
 	  }
 
 	  _createClass(Dashboard, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var thisthis = this;
+	      $.get("http://lvh.me/cgi-bin/rest/rest_saveload.py", { saveload: 'load',
+	        dashboardid: thisthis.props.fullstate.did
+	      }, function (rawData) {
+	        thisthis.props.load_data_into_dashboard(rawData.data);
+	      });
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps, prevState) {
+	      // This code would save the state on every miniscule change.
+	      //saveDashboard(this.props.fullstate);
+	    }
+	  }, {
 	    key: 'changeCurrentTab',
 	    value: function changeCurrentTab(newTab) {
 	      this.props.change_current_tab(newTab);
@@ -7686,21 +7763,21 @@
 	      var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));
 	      oldDash[this.props.currentTab].tabStartDateISO = picker.startDate.toISOString();
 	      oldDash[this.props.currentTab].tabEndDateISO = picker.endDate.toISOString();
-	      this.props.update_dash({ dashLayout: oldDash });
+	      this.props.update_dash_plus_save({ dashLayout: oldDash });
 	    }
 	  }, {
 	    key: 'toggleTabHideDate',
 	    value: function toggleTabHideDate() {
 	      var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));
 	      oldDash[this.props.currentTab].tabHideDate = !oldDash[this.props.currentTab].tabHideDate;
-	      this.props.update_dash({ dashLayout: oldDash });
+	      this.props.update_dash_plus_save({ dashLayout: oldDash });
 	    }
 	  }, {
 	    key: 'deleteCurrentTab',
 	    value: function deleteCurrentTab() {
 	      var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));
 	      oldDash.splice(this.props.currentTab, 1);
-	      this.props.update_dash({ dashLayout: oldDash });
+	      this.props.update_dash_plus_save({ dashLayout: oldDash });
 	    }
 	  }, {
 	    key: 'render',
@@ -7743,7 +7820,8 @@
 	    currentTab: state.currentTab,
 	    configAddWidgetDisplay: state.configAddWidgetDisplay,
 	    configAddTabDisplay: state.configAddTabDisplay,
-	    configEditTabDisplay: state.configEditTabDisplay
+	    configEditTabDisplay: state.configEditTabDisplay,
+	    fullstate: state
 	  };
 	};
 
@@ -7755,8 +7833,14 @@
 	    update_dash: function update_dash(changes) {
 	      return dispatch({ type: 'UPDATE_DASH', changes: changes });
 	    },
+	    update_dash_plus_save: function update_dash_plus_save(changes) {
+	      return dispatch({ type: 'UPDATE_DASH_PLUS_SAVE', changes: changes });
+	    },
 	    change_current_tab: function change_current_tab(newTab) {
 	      return dispatch({ type: 'CHANGE_CURRENT_TAB', newTab: newTab });
+	    },
+	    load_data_into_dashboard: function load_data_into_dashboard(statestring) {
+	      return dispatch({ type: 'LOAD_DATA_INTO_DASHBOARD', statestring: statestring });
 	    }
 	  };
 	};
@@ -7766,7 +7850,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 	//    console.log(this.store.getState());
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61), __webpack_require__(1)))
 
 /***/ },
 /* 60 */
@@ -8235,7 +8319,7 @@
 	  }, {
 	    key: 'datepickerUpdate',
 	    value: function datepickerUpdate(event, picker) {
-	      this.props.update_widget(this.props.widgetindex, {
+	      this.props.update_widget_plus_save(this.props.widgetindex, {
 	        configDisplay: 'none',
 	        myStartDateISO: picker.startDate.toISOString(),
 	        myEndDateISO: picker.endDate.toISOString()
@@ -8313,7 +8397,8 @@
 	  return {
 	    widgets: state.widgets,
 	    dashLayout: state.dashLayout,
-	    currentTab: state.currentTab
+	    currentTab: state.currentTab,
+	    fullstate: state
 	  };
 	};
 
@@ -8327,6 +8412,9 @@
 	    },
 	    update_widget: function update_widget(widgetindex, changes) {
 	      return dispatch({ type: 'UPDATE_WIDGET', widgetindex: widgetindex, changes: changes });
+	    },
+	    update_widget_plus_save: function update_widget_plus_save(widgetindex, changes) {
+	      return dispatch({ type: 'UPDATE_WIDGET_PLUS_SAVE', widgetindex: widgetindex, changes: changes });
 	    }
 	  };
 	};
@@ -18566,7 +18654,7 @@
 /* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(_) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(_, $) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -18578,6 +18666,7 @@
 	exports.getMoveOptions = getMoveOptions;
 	exports.calculateNewLayout = calculateNewLayout;
 	exports.niceDate = niceDate;
+	exports.saveDashboard = saveDashboard;
 	// Here we assume that request is more like a rest point.
 	// Hold on - I have a rest point on my machine.
 	//
@@ -18696,7 +18785,17 @@
 
 	  return year + "-" + month.substr(-2) + "-" + day.substr(-2);
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+	function saveDashboard(config) {
+	  console.log("Saving Dashboard");
+	  $.post("http://lvh.me/cgi-bin/rest/rest_saveload.py", { saveload: 'save',
+	    dashboardid: config.did,
+	    configuration: JSON.stringify(config)
+	  }, function (data, status) {
+	    // Nuttin.
+	  });
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(61)))
 
 /***/ },
 /* 63 */
@@ -18869,14 +18968,14 @@
 	    key: 'updateLayout',
 	    value: function updateLayout() {
 	      var newDashLayout = (0, _support.calculateNewLayout)(this.props.currentTab, this.props.dashLayout, this.props.widgetindex, Number(this.state.moveValue));
-	      this.props.update_layout(newDashLayout);
 	      this.props.update_widget(this.props.widgetindex, { configDisplay: 'none' });
+	      this.props.update_layout(newDashLayout);
 	    }
 	  }, {
 	    key: 'updateWidget',
 	    value: function updateWidget() {
 	      // Update the widget according to props.
-	      this.props.update_widget(this.props.widgetindex, {
+	      this.props.update_widget_plus_save(this.props.widgetindex, {
 	        configDisplay: 'none',
 	        source: this.state.source,
 	        metrics: this.state.metrics,
@@ -18958,6 +19057,9 @@
 	  return {
 	    update_widget: function update_widget(widgetindex, changes) {
 	      return dispatch({ type: 'UPDATE_WIDGET', widgetindex: widgetindex, changes: changes });
+	    },
+	    update_widget_plus_save: function update_widget_plus_save(widgetindex, changes) {
+	      return dispatch({ type: 'UPDATE_WIDGET_PLUS_SAVE', widgetindex: widgetindex, changes: changes });
 	    },
 	    update_layout: function update_layout(newLayout) {
 	      return dispatch({ type: 'UPDATE_LAYOUT', newLayout: newLayout });
@@ -19119,14 +19221,14 @@
 	    key: 'updateLayout',
 	    value: function updateLayout() {
 	      var newDashLayout = (0, _support.calculateNewLayout)(this.props.currentTab, this.props.dashLayout, this.props.widgetindex, Number(this.state.moveValue));
-	      this.props.update_layout(newDashLayout);
 	      this.props.update_widget(this.props.widgetindex, { configDisplay: 'none' });
+	      this.props.update_layout(newDashLayout);
 	    }
 	  }, {
 	    key: 'updateWidget',
 	    value: function updateWidget() {
 	      // Update the widget according to props.
-	      this.props.update_widget(this.props.widgetindex, {
+	      this.props.update_widget_plus_save(this.props.widgetindex, {
 	        configDisplay: 'none',
 	        source: this.state.source,
 	        metrics: this.state.metrics,
@@ -19211,6 +19313,9 @@
 	  return {
 	    update_widget: function update_widget(widgetindex, changes) {
 	      return dispatch({ type: 'UPDATE_WIDGET', widgetindex: widgetindex, changes: changes });
+	    },
+	    update_widget_plus_save: function update_widget_plus_save(widgetindex, changes) {
+	      return dispatch({ type: 'UPDATE_WIDGET_PLUS_SAVE', widgetindex: widgetindex, changes: changes });
 	    },
 	    update_layout: function update_layout(newLayout) {
 	      return dispatch({ type: 'UPDATE_LAYOUT', newLayout: newLayout });
@@ -37096,14 +37201,14 @@
 	    key: 'updateLayout',
 	    value: function updateLayout() {
 	      var newDashLayout = (0, _support.calculateNewLayout)(this.props.currentTab, this.props.dashLayout, this.props.widgetindex, Number(this.state.moveValue));
-	      this.props.update_layout(newDashLayout);
 	      this.props.update_widget(this.props.widgetindex, { configDisplay: 'none' });
+	      this.props.update_layout(newDashLayout);
 	    }
 	  }, {
 	    key: 'updateWidget',
 	    value: function updateWidget() {
 	      // Update the widget according to props.
-	      this.props.update_widget(this.props.widgetindex, {
+	      this.props.update_widget_plus_save(this.props.widgetindex, {
 	        configDisplay: 'none',
 	        source: this.state.source,
 	        metrics: this.state.metrics,
@@ -37184,6 +37289,9 @@
 	  return {
 	    update_widget: function update_widget(widgetindex, changes) {
 	      return dispatch({ type: 'UPDATE_WIDGET', widgetindex: widgetindex, changes: changes });
+	    },
+	    update_widget_plus_save: function update_widget_plus_save(widgetindex, changes) {
+	      return dispatch({ type: 'UPDATE_WIDGET_PLUS_SAVE', widgetindex: widgetindex, changes: changes });
 	    },
 	    update_layout: function update_layout(newLayout) {
 	      return dispatch({ type: 'UPDATE_LAYOUT', newLayout: newLayout });
@@ -37337,14 +37445,14 @@
 	    key: 'updateLayout',
 	    value: function updateLayout() {
 	      var newDashLayout = (0, _support.calculateNewLayout)(this.props.currentTab, this.props.dashLayout, this.props.widgetindex, Number(this.state.moveValue));
-	      this.props.update_layout(newDashLayout);
 	      this.props.update_widget(this.props.widgetindex, { configDisplay: 'none' });
+	      this.props.update_layout(newDashLayout);
 	    }
 	  }, {
 	    key: 'updateWidget',
 	    value: function updateWidget() {
 	      // Update the widget according to props.
-	      this.props.update_widget(this.props.widgetindex, {
+	      this.props.update_widget_plus_save(this.props.widgetindex, {
 	        configDisplay: 'none',
 	        source: this.state.source,
 	        metrics: this.state.metrics,
@@ -37427,6 +37535,9 @@
 	  return {
 	    update_widget: function update_widget(widgetindex, changes) {
 	      return dispatch({ type: 'UPDATE_WIDGET', widgetindex: widgetindex, changes: changes });
+	    },
+	    update_widget_plus_save: function update_widget_plus_save(widgetindex, changes) {
+	      return dispatch({ type: 'UPDATE_WIDGET_PLUS_SAVE', widgetindex: widgetindex, changes: changes });
 	    },
 	    update_layout: function update_layout(newLayout) {
 	      return dispatch({ type: 'UPDATE_LAYOUT', newLayout: newLayout });
@@ -54162,8 +54273,6 @@
 	      aggDatetime: false,
 	      aggMethod: '(undefined)',
 	      metrics: ['(undefined)', '(undefined)'],
-	      //tabStartDateISO:  moment().toISOString(),
-	      //tabEndDateISO:    moment().toISOString(),
 	      myStartDateISO: moment().toISOString(),
 	      myEndDateISO: moment().toISOString(),
 	      filters: [],
@@ -54179,8 +54288,6 @@
 	      aggDatetime: false,
 	      aggMethod: '(undefined)',
 	      metrics: ['(undefined)', '(undefined)'],
-	      //tabStartDateISO:  moment().toISOString(),
-	      //tabEndDateISO:    moment().toISOString(),
 	      myStartDateISO: moment().toISOString(),
 	      myEndDateISO: moment().toISOString(),
 	      filters: [],
@@ -54196,8 +54303,6 @@
 	      aggDatetime: false,
 	      aggMethod: '(undefined)',
 	      metrics: ['(undefined)', '(undefined)'],
-	      //tabStartDateISO:  moment().toISOString(),
-	      //tabEndDateISO:    moment().toISOString(),
 	      myStartDateISO: moment().toISOString(),
 	      myEndDateISO: moment().toISOString(),
 	      filters: [],
@@ -54213,8 +54318,6 @@
 	      aggDatetime: false,
 	      aggMethod: '(undefined)',
 	      metrics: ['(undefined)', '(undefined)'],
-	      //tabStartDateISO:  moment().toISOString(),
-	      //tabEndDateISO:    moment().toISOString(),
 	      myStartDateISO: moment().toISOString(),
 	      myEndDateISO: moment().toISOString(),
 	      filters: [],
@@ -54227,8 +54330,6 @@
 	      height: 'half',
 	      source: '(undefined)',
 	      metrics: ['(undefined)'],
-	      //tabStartDateISO:  moment().toISOString(),
-	      //tabEndDateISO:    moment().toISOString(),
 	      myStartDateISO: moment().toISOString(),
 	      myEndDateISO: moment().toISOString(),
 	      filters: [],
@@ -54241,8 +54342,6 @@
 	      height: 'half',
 	      source: '(undefined)',
 	      metrics: ['(undefined)', '(undefined)'],
-	      //tabStartDateISO:  moment().toISOString(),
-	      //tabEndDateISO:    moment().toISOString(),
 	      myStartDateISO: moment().toISOString(),
 	      myEndDateISO: moment().toISOString(),
 	      filters: [],
@@ -54256,8 +54355,6 @@
 	      source: '(undefined)',
 	      metrics: ['(undefined)'],
 	      buckets: '(undefined)',
-	      //tabStartDateISO:  moment().toISOString(),
-	      //tabEndDateISO:    moment().toISOString(),
 	      myStartDateISO: moment().toISOString(),
 	      myEndDateISO: moment().toISOString(),
 	      filters: [],
@@ -54284,7 +54381,6 @@
 	    key: 'updateButtonHandler',
 	    value: function updateButtonHandler(i) {
 	      this.props.add_widget(this.state.configs[i]);
-	      this.props.update_dash({ configAddWidgetDisplay: 'none' });
 	    }
 	  }, {
 	    key: 'render',
@@ -54417,7 +54513,7 @@
 	          layout: [],
 	          tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
 	          tabEndDateISO: moment('2016-06-30T00:00:00').toISOString() });
-	        this.props.update_dash({ dashLayout: oldDash, configAddTabDisplay: 'none' });
+	        this.props.update_dash_plus_save({ dashLayout: oldDash, configAddTabDisplay: 'none' });
 	      } else {
 	        this.cancelButtonHandler();
 	      }
@@ -54456,6 +54552,9 @@
 	  return {
 	    update_dash: function update_dash(changes) {
 	      return dispatch({ type: 'UPDATE_DASH', changes: changes });
+	    },
+	    update_dash_plus_save: function update_dash_plus_save(changes) {
+	      return dispatch({ type: 'UPDATE_DASH_PLUS_SAVE', changes: changes });
 	    }
 	  };
 	};
@@ -54645,9 +54744,9 @@
 	      if (this.state.tabName !== '') {
 	        var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));
 	        oldDash[this.props.currentTab].tabName = this.state.tabName;
-	        this.props.update_dash({ dashLayout: oldDash, configEditTabDisplay: 'none' });
+	        this.props.update_dash_plus_save({ dashLayout: oldDash, configEditTabDisplay: 'none' });
 	      } else {
-	        this.cancelButtonHandler();
+	        this.props.update_dash({ configEditTabDisplay: 'none' });
 	      }
 	    }
 	  }, {
@@ -54685,6 +54784,9 @@
 	  return {
 	    update_dash: function update_dash(changes) {
 	      return dispatch({ type: 'UPDATE_DASH', changes: changes });
+	    },
+	    update_dash_plus_save: function update_dash_plus_save(changes) {
+	      return dispatch({ type: 'UPDATE_DASH_PLUS_SAVE', changes: changes });
 	    }
 	  };
 	};

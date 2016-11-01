@@ -25,7 +25,7 @@ class ConfigureAddTab extends React.Component {
                     layout:          [],
                     tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
                     tabEndDateISO:   moment('2016-06-30T00:00:00').toISOString()});
-      this.props.update_dash({dashLayout: oldDash,configAddTabDisplay: 'none'});
+      this.props.update_dash_plus_save({dashLayout: oldDash,configAddTabDisplay: 'none'});
     } else {
       this.cancelButtonHandler();
     }
@@ -67,7 +67,8 @@ const mapStateToProps = (state) => ({
 // This maps the dispatch tools, or some of them, to our props.
 
 const mapDispatchToProps = (dispatch,ownProps) => ({
-  update_dash:   (changes) => dispatch({type: 'UPDATE_DASH',changes:changes}),
+  update_dash:             (changes) => dispatch({type: 'UPDATE_DASH',changes:changes}),
+  update_dash_plus_save:   (changes) => dispatch({type: 'UPDATE_DASH_PLUS_SAVE',changes:changes}),
 })
 
 ////////////////////////////////////////////////////////////////////////////////

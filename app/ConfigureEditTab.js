@@ -27,9 +27,9 @@ class ConfigureEditTab extends React.Component {
     if (this.state.tabName !== '') {
       var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));      
       oldDash[this.props.currentTab].tabName = this.state.tabName;
-      this.props.update_dash({dashLayout: oldDash,configEditTabDisplay: 'none'});
+      this.props.update_dash_plus_save({dashLayout: oldDash,configEditTabDisplay: 'none'});
     } else {
-      this.cancelButtonHandler();
+      this.props.update_dash({configEditTabDisplay: 'none'});
     }
   }
   onChange(e) {
@@ -70,6 +70,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch,ownProps) => ({
   update_dash:   (changes) => dispatch({type: 'UPDATE_DASH',changes:changes}),
+  update_dash_plus_save:   (changes) => dispatch({type: 'UPDATE_DASH_PLUS_SAVE',changes:changes})
 })
 
 ////////////////////////////////////////////////////////////////////////////////

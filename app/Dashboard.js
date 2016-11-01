@@ -8,6 +8,7 @@ import ConfigureAddTab from './ConfigureAddTab.js';
 import ConfigureEditTab from './ConfigureEditTab.js';
 var DateRangePicker = require('react-bootstrap-daterangepicker');
 var moment = require('moment');
+import {saveDashboard} from './support.js';
 
 require('./dash.css');
 
@@ -25,6 +26,22 @@ class Dashboard extends React.Component {
     this.toggleTabHideDate   = this.toggleTabHideDate.bind(this);
     this.deleteCurrentTab    = this.deleteCurrentTab.bind(this);
   }
+  componentDidMount() {
+    var thisthis = this;
+    $.get(
+      "http://lvh.me/cgi-bin/rest/rest_saveload.py",
+      {saveload: 'load',
+       dashboardid: thisthis.props.fullstate.did
+      },
+      function(rawData) {
+        thisthis.props.load_data_into_dashboard(rawData.data);
+      }
+    );
+  }
+  componentDidUpdate(prevProps,prevState) {
+    // This code would save the state on every miniscule change.
+    //saveDashboard(this.props.fullstate);
+  }
   changeCurrentTab(newTab) {
     this.props.change_current_tab(newTab);
   }
@@ -32,26 +49,26 @@ class Dashboard extends React.Component {
     this.props.update_dash({configAddWidgetDisplay: 'block'});
   }
   openAddTabWindow() {
-    this.props.update_dash({configAddTabDisplay: 'block'});    
+    this.props.update_dash({configAddTabDisplay: 'block'});
   }
   openEditTabWindow() {
-    this.props.update_dash({configEditTabDisplay: 'block'});    
+    this.props.update_dash({configEditTabDisplay: 'block'});
   }
   datepickerUpdate(event,picker) {
     var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));
     oldDash[this.props.currentTab].tabStartDateISO = picker.startDate.toISOString();
     oldDash[this.props.currentTab].tabEndDateISO = picker.endDate.toISOString();
-    this.props.update_dash({dashLayout: oldDash});
+    this.props.update_dash_plus_save({dashLayout: oldDash});
   }
   toggleTabHideDate() {
     var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));
     oldDash[this.props.currentTab].tabHideDate = !oldDash[this.props.currentTab].tabHideDate;
-    this.props.update_dash({dashLayout: oldDash});    
+    this.props.update_dash_plus_save({dashLayout: oldDash});
   }
   deleteCurrentTab() {
     var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));
     oldDash.splice(this.props.currentTab,1);
-    this.props.update_dash({dashLayout: oldDash});    
+    this.props.update_dash_plus_save({dashLayout: oldDash});
   }
   render() {
     var thisthis = this;
@@ -89,8 +106,8 @@ class Dashboard extends React.Component {
         {((currentDash.layout.length === 0) && (this.props.dashLayout.length > 1)) ? <div className='addstuffbutton' onClick={thisthis.deleteCurrentTab}>Delete Tab</div> : ''}
         <div className='addstuffbutton' onClick={thisthis.toggleTabHideDate}>{currentDash.tabHideDate ? 'Show Tab Date' : 'Hide Tab Date'}</div>
         </div>
-        </div>        
-        </div>      
+        </div>
+        </div>
         {props.dashLayout.map(function(tab,tabindex) {
           return(
               <div className={props.currentTab==tabindex ? 'tabsheet-visible' : 'tabsheet-invisible'} key={tabindex}>
@@ -124,7 +141,8 @@ const mapStateToProps = (state) => ({
   currentTab:             state.currentTab,
   configAddWidgetDisplay: state.configAddWidgetDisplay,
   configAddTabDisplay:    state.configAddTabDisplay,
-  configEditTabDisplay:   state.configEditTabDisplay
+  configEditTabDisplay:   state.configEditTabDisplay,
+  fullstate:              state
 })
 
 
@@ -132,8 +150,10 @@ const mapStateToProps = (state) => ({
 // This maps the dispatch tools, or some of them, to our props.
 
 const mapDispatchToProps = (dispatch) => ({
-  update_dash:   (changes) => dispatch({type: 'UPDATE_DASH',changes:changes}),  
-  change_current_tab: (newTab) => dispatch({type: 'CHANGE_CURRENT_TAB',newTab:newTab})
+  update_dash:                  (changes)     => dispatch({type: 'UPDATE_DASH',changes:changes}),
+  update_dash_plus_save:        (changes)     => dispatch({type: 'UPDATE_DASH_PLUS_SAVE',changes:changes}),
+  change_current_tab:           (newTab)      => dispatch({type: 'CHANGE_CURRENT_TAB',newTab:newTab}),
+  load_data_into_dashboard:     (statestring) => dispatch({type: 'LOAD_DATA_INTO_DASHBOARD',statestring:statestring})
 })
 
 ////////////////////////////////////////////////////////////////////////////////

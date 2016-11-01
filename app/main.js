@@ -5,6 +5,7 @@ var ReactDOM = require('react-dom');
 var moment = require('moment');
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
+import {saveDashboard} from './support.js';
 
 // Mine.
 
@@ -18,6 +19,7 @@ var userReducer = function(state, action) {
   //console.log('here:');
   //console.log(action);
   if (state === undefined) {
+    /*
     state = {
       widgets: [
         {key:  0,
@@ -108,22 +110,59 @@ var userReducer = function(state, action) {
       configAddWidgetDisplay: 'none',
       configAddTabDisplay: 'none',
       configEditTabDisplay: 'none',
-      dummy: true
+      };
+    */
+    state = {
+      did: 0,  // This'll have to come from a log in thingy.
+      widgets: [],
+      dashLayout: [{tabName:         'Default',
+                    layout:          [],
+                    tabHideDate:     true,
+                    tabStartDateISO: moment().toISOString(),
+                    tabEndDateISO:   moment().toISOString()}
+                  ],
+      currentTab: 0,
+      configAddWidgetDisplay: 'none',
+      configAddTabDisplay: 'none',
+      configEditTabDisplay: 'none',
     };
   }
+  
   var newState = JSON.parse(JSON.stringify(state));
-  // action.type === UPDATE_WIDGET then we also have:
-  // action.widgetindex
-  // action.changes
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // UPDATE_WIDGET
+  // UPDATE_WIDGET_PLUS_SAVE
+
   if (action.type === 'UPDATE_WIDGET') {
     newState.widgets[action.widgetindex].data = _.extend(newState.widgets[action.widgetindex].data,action.changes);
   }
+  if (action.type === 'UPDATE_WIDGET_PLUS_SAVE') {
+    newState.widgets[action.widgetindex].data = _.extend(newState.widgets[action.widgetindex].data,action.changes);
+    saveDashboard(newState);
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // UPDATE_DASH
+  // UPDATE_DASH_PLUS_SAVE  
+
   if (action.type === 'UPDATE_DASH') {
     newState = _.extend(newState,action.changes);
     if (newState.currentTab >= newState.dashLayout.length) {
       newState.currentTab--;
     }
   }
+  if (action.type === 'UPDATE_DASH_PLUS_SAVE') {
+    newState = _.extend(newState,action.changes);
+    if (newState.currentTab >= newState.dashLayout.length) {
+      newState.currentTab--;
+    }
+    saveDashboard(newState);
+  }
+  
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // ADD_WIDGET
+  // This always saves.
+
   if (action.type === 'ADD_WIDGET') {
     // Find a valid key.
     var validKey = 0;
@@ -137,7 +176,14 @@ var userReducer = function(state, action) {
     var windex = newState.widgets.length-1;
     // Put the widget in the tab layout.
     newState.dashLayout[newState.currentTab].layout.push([windex]);
+    newState.configAddWidgetDisplay = 'none';
+    saveDashboard(newState);
   }
+  
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // DELETE_WIDGET
+  // This always saves.
+  
   if (action.type === 'DELETE_WIDGET') {
     var indexToDelete = action.widgetindex;
     var currentLayout = newState.dashLayout[newState.currentTab].layout;
@@ -157,12 +203,32 @@ var userReducer = function(state, action) {
       });
     });
     newState.widgets.splice(indexToDelete,1);
+    saveDashboard(newState);
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // UPDATE_LAYOUT
+  // This always saves.
+  
   if (action.type === 'UPDATE_LAYOUT') {
     newState.dashLayout = action.newLayout;
+    saveDashboard(newState);
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // CHANGE_CURRENT_TAB
+  // This never saves.
+  
   if (action.type === 'CHANGE_CURRENT_TAB') {
     newState.currentTab = action.newTab;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // LOAD_DATA_INTO_DASHBOARD
+  // This never saves.
+  
+  if (action.type === 'LOAD_DATA_INTO_DASHBOARD') {
+    newState = action.statestring;
   }
   return newState;
 }
@@ -171,21 +237,6 @@ var userReducer = function(state, action) {
 // I guess it's passed the reducer to ... allow the reducer to access it or something?
 
 var store = createStore(userReducer);
-
-// Add one more thing for testing.
-
-{/*
-store.dispatch({type:'ADD_WIDGET',data: {type:             'column',
-                                         source:           'source01',
-                                         aggNumeric:       true,
-                                         aggDatetime:      true,
-                                         aggMethod:        'mean',
-                                         metrics:          ['datetime','save'],
-                                         filters:          [],
-                                         configDisplay:    'none'
-                                        }});
- */}
-// Now the app.
 
 ReactDOM.render(
     <Provider store={store}>

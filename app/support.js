@@ -117,3 +117,16 @@ export function niceDate(z) {
   return(year+"-"+month.substr(-2)+"-"+day.substr(-2));
 }
 
+export function saveDashboard(config) {
+  console.log("Saving Dashboard")
+  $.post(
+    "http://lvh.me/cgi-bin/rest/rest_saveload.py",
+    {saveload: 'save',
+     dashboardid: config.did,
+     configuration: JSON.stringify(config)
+    },
+    function(data, status){
+      // Nuttin.
+    }
+  );
+}

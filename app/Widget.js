@@ -423,7 +423,7 @@ class Widget extends React.Component {
     this.updateInternals();
   }
   datepickerUpdate(event,picker) {
-    this.props.update_widget(this.props.widgetindex,{
+    this.props.update_widget_plus_save(this.props.widgetindex,{
       configDisplay: 'none',
       myStartDateISO: picker.startDate.toISOString(),
       myEndDateISO:   picker.endDate.toISOString()
@@ -490,7 +490,8 @@ class Widget extends React.Component {
 const mapStateToProps = (state) => ({
   widgets: state.widgets,
   dashLayout: state.dashLayout,
-  currentTab: state.currentTab
+  currentTab: state.currentTab,
+  fullstate: state
 })
 
 // I think:
@@ -498,7 +499,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   add_widget:    ()                    => dispatch({type: 'ADD_WIDGET',    data:{type:'pie'}}),
-  update_widget: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET', widgetindex:widgetindex,changes:changes})
+  update_widget: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET', widgetindex:widgetindex,changes:changes}),
+  update_widget_plus_save: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET_PLUS_SAVE',widgetindex:widgetindex,changes:changes})
 })
 
 ////////////////////////////////////////////////////////////////////////////////
