@@ -119,14 +119,29 @@ export function niceDate(z) {
 
 export function saveDashboard(config) {
   console.log("Saving Dashboard")
-  $.post(
-    "http://lvh.me/cgi-bin/rest/rest_saveload.py",
-    {saveload: 'save',
-     dashboardid: config.did,
-     configuration: JSON.stringify(config)
-    },
-    function(data, status){
-      // Nuttin.
-    }
-  );
+  if (1==1) {
+    $.post(
+      saveloadRestPoint(),
+      //"http://lvh.me/cgi-bin/rest/rest_saveload.py",
+      {saveload: 'save',
+       dashboardid: config.did,
+       configuration: JSON.stringify(config)
+      },
+      function(data, status){
+        // Nuttin.
+      }
+    );
+  } else {
+    console.log('Not really');
+  }
+}
+
+export function dataRestPoint() {
+  //return("http://lvh.me/cgi-bin/rest/rest_retrieveData.py");
+  return("http://ec2-54-213-91-179.us-west-2.compute.amazonaws.com/cgi-bin/dash_rest/rest_retrieveData.py");  
+}
+
+export function saveloadRestPoint() {
+  //return("http://lvh.me/cgi-bin/rest/rest_saveload.py");
+  return("http://ec2-54-213-91-179.us-west-2.compute.amazonaws.com/cgi-bin/dash_rest/rest_saveload.py");  
 }

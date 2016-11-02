@@ -72,102 +72,8 @@
 	// The job of a reducer is to take an action and make a change to the store.
 
 	var userReducer = function userReducer(state, action) {
-	  //console.log('here:');
-	  //console.log(action);
+
 	  if (state === undefined) {
-	    /*
-	    state = {
-	      widgets: [
-	        {key:  0,
-	         data: {type:             'pie',
-	                width:            'half',
-	                height:           'half',
-	                source:           'source01',
-	                aggNumeric:       true,
-	                aggDatetime:      true,
-	                aggMethod:        'mean',
-	                metrics:          ['datetime','cost'],
-	                filters:          [{metric:'age',comp:'<',value:'50'}],
-	                timeframe:        'mine',
-	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	                myStartDateISO:   moment('2016-06-01T00:00:00').toISOString(),
-	                myEndDateISO:     moment('2016-06-15T00:00:00').toISOString(),
-	                configDisplay:    'none'}},
-	        {key:  1,
-	         data: {type:             'line',
-	                width:            'full',
-	                height:           'half',
-	                source:           'source01',
-	                aggNumeric:       false,
-	                aggDatetime:      true,
-	                aggMethod:        'mean',
-	                metrics:          ['datetime','cost'],
-	                filters:          [],
-	                timeframe:        'tab',
-	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	                myStartDateISO:   moment().toISOString(),
-	                myEndDateISO:     moment().toISOString(),
-	                configDisplay:    'none'}},
-	        {key:  2,
-	         data: {type:             'histogram',
-	                width:            'half',
-	                height:           'half',
-	                source:           'source01',
-	                metrics:          ['age'],
-	                buckets:          10,
-	                filters:          [],
-	                timeframe:        'tab',
-	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	                myStartDateISO:   moment().toISOString(),
-	                myEndDateISO:     moment().toISOString(),
-	                configDisplay:    'none'}},
-	        {key:  3,
-	         data: {type:             'scatter',
-	                width:            'half',
-	                height:           'half',
-	                source:           'source02',
-	                metrics:          ['age','happiness'],
-	                filters:          [],
-	                timeframe:        'none',
-	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	                myStartDateISO:   moment().toISOString(),
-	                myEndDateISO:     moment().toISOString(),
-	                configDisplay:    'none'}},
-	        {key:  4,
-	         data: {type:             'stats',
-	                width:            'half',
-	                height:           'half',
-	                source:           'source02',
-	                metrics:          ['happiness'],
-	                filters:          [],
-	                timeframe:        'none',
-	                //tabStartDateISO:  moment('2016-06-15T00:00:00').toISOString(),
-	                //tabEndDateISO:    moment('2016-06-30T00:00:00').toISOString(),
-	                myStartDateISO:   moment().toISOString(),
-	                myEndDateISO:     moment().toISOString(),
-	                configDisplay:    'none'}}
-	      ],
-	      dashLayout: [{tabName:         'Justin',
-	                    layout:          [[0,2],[1]],
-	                    tabHideDate:     true,
-	                    tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
-	                    tabEndDateISO:   moment('2016-06-30T00:00:00').toISOString()},
-	                   {tabName:         'Stuart',
-	                    layout:          [[3,4]],
-	                    tabHideDate:     false,
-	                    tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
-	                    tabEndDateISO:   moment('2016-06-30T00:00:00').toISOString()},
-	                  ],
-	      currentTab: 0,
-	      configAddWidgetDisplay: 'none',
-	      configAddTabDisplay: 'none',
-	      configEditTabDisplay: 'none',
-	      };
-	    */
 	    state = {
 	      did: 0, // This'll have to come from a log in thingy.
 	      widgets: [],
@@ -181,9 +87,86 @@
 	      configAddTabDisplay: 'none',
 	      configEditTabDisplay: 'none'
 	    };
+	    // For resetting for testing.
+	    if (false) {
+	      state = {
+	        widgets: [{ key: 0,
+	          data: { type: 'pie',
+	            width: 'half',
+	            height: 'half',
+	            source: 'source01',
+	            aggNumeric: true,
+	            aggDatetime: true,
+	            aggMethod: 'mean',
+	            metrics: ['datetime', 'cost'],
+	            filters: [{ metric: 'age', comp: '<', value: '50' }],
+	            timeframe: 'mine',
+	            myStartDateISO: moment('2016-06-01T00:00:00').toISOString(),
+	            myEndDateISO: moment('2016-06-15T00:00:00').toISOString(),
+	            configDisplay: 'none' } }, { key: 1,
+	          data: { type: 'line',
+	            width: 'full',
+	            height: 'half',
+	            source: 'source01',
+	            aggNumeric: false,
+	            aggDatetime: true,
+	            aggMethod: 'mean',
+	            metrics: ['datetime', 'cost'],
+	            filters: [],
+	            timeframe: 'tab',
+	            myStartDateISO: moment().toISOString(),
+	            myEndDateISO: moment().toISOString(),
+	            configDisplay: 'none' } }, { key: 2,
+	          data: { type: 'histogram',
+	            width: 'half',
+	            height: 'half',
+	            source: 'source01',
+	            metrics: ['age'],
+	            buckets: 10,
+	            filters: [],
+	            timeframe: 'tab',
+	            myStartDateISO: moment().toISOString(),
+	            myEndDateISO: moment().toISOString(),
+	            configDisplay: 'none' } }, { key: 3,
+	          data: { type: 'scatter',
+	            width: 'half',
+	            height: 'half',
+	            source: 'source02',
+	            metrics: ['age', 'happiness'],
+	            filters: [],
+	            timeframe: 'none',
+	            myStartDateISO: moment().toISOString(),
+	            myEndDateISO: moment().toISOString(),
+	            configDisplay: 'none' } }, { key: 4,
+	          data: { type: 'stats',
+	            width: 'half',
+	            height: 'half',
+	            source: 'source02',
+	            metrics: ['happiness'],
+	            filters: [],
+	            timeframe: 'none',
+	            myStartDateISO: moment().toISOString(),
+	            myEndDateISO: moment().toISOString(),
+	            configDisplay: 'none' } }],
+	        dashLayout: [{ tabName: 'Justin',
+	          layout: [[0, 2], [1]],
+	          tabHideDate: true,
+	          tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
+	          tabEndDateISO: moment('2016-06-30T00:00:00').toISOString() }, { tabName: 'Stuart',
+	          layout: [[3, 4]],
+	          tabHideDate: false,
+	          tabStartDateISO: moment('2016-06-15T00:00:00').toISOString(),
+	          tabEndDateISO: moment('2016-06-30T00:00:00').toISOString() }],
+	        currentTab: 0,
+	        configAddWidgetDisplay: 'none',
+	        configAddTabDisplay: 'none',
+	        configEditTabDisplay: 'none'
+	      };
+	    }
 	  }
 
 	  var newState = JSON.parse(JSON.stringify(state));
+
 	  ////////////////////////////////////////////////////////////////////////////////////////
 	  // UPDATE_WIDGET
 	  // UPDATE_WIDGET_PLUS_SAVE
@@ -7725,7 +7708,9 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var thisthis = this;
-	      $.get("http://lvh.me/cgi-bin/rest/rest_saveload.py", { saveload: 'load',
+	      document.cookie = "username=John Doe";
+
+	      $.get((0, _support.saveloadRestPoint)(), { saveload: 'load',
 	        dashboardid: thisthis.props.fullstate.did
 	      }, function (rawData) {
 	        thisthis.props.load_data_into_dashboard(rawData.data);
@@ -7735,6 +7720,7 @@
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate(prevProps, prevState) {
 	      // This code would save the state on every miniscule change.
+	      // Good for flushing any issues.
 	      //saveDashboard(this.props.fullstate);
 	    }
 	  }, {
@@ -7994,7 +7980,7 @@
 	        if (data.source === 'undefined' || data.metrics[0] === '(undefined)' || data.metrics[1] === '(undefined)' || data.aggMethod === '(undefined)' || data.timeframe === '(undefined)') {
 	          $(ReactDOM.findDOMNode(chart)).html('<div class="nice-middle">Not Configured</div>'); //data.type+' Widget Not Configured!');
 	        } else {
-	          $.get("http://lvh.me/cgi-bin/rest/rest_retrieveData.py", { source: data.source,
+	          $.get((0, _support.dataRestPoint)(), { source: data.source,
 	            metrics: data.metrics[0] + ',' + data.metrics[1],
 	            aggmetric: data.metrics[0],
 	            nonaggmetric: data.metrics[1],
@@ -8094,7 +8080,7 @@
 	        if (data.source === '(undefined)' || data.metrics[0] === '(undefined)' || data.buckets === '(undefined)' || data.timeframe === '(undefined)') {
 	          $(ReactDOM.findDOMNode(chart)).html('Histogram Widget Not Configured!');
 	        } else {
-	          $.get("http://lvh.me/cgi-bin/rest/rest_retrieveData.py", { source: data.source,
+	          $.get((0, _support.dataRestPoint)(), { source: data.source,
 	            metrics: data.metrics[0],
 	            filters: fs
 	          }, function (rawData) {
@@ -8163,7 +8149,7 @@
 	        if (data.source === 'undefined' || data.metrics[0] === '(undefined)' || data.metrics[1] === '(undefined)' || data.timeframe === '(undefined)') {
 	          $(ReactDOM.findDOMNode(chart)).html('Scatter Widget Not Configured!');
 	        } else {
-	          $.get("http://lvh.me/cgi-bin/rest/rest_retrieveData.py", { source: data.source,
+	          $.get((0, _support.dataRestPoint)(), { source: data.source,
 	            metrics: data.metrics[0] + ',' + data.metrics[1],
 	            filters: fs
 	          }, function (rawData) {
@@ -8230,7 +8216,7 @@
 	        if (data.source === '(undefined)' || data.metrics[0] === '(undefined)' || data.timeframe === '(undefined)') {
 	          $(ReactDOM.findDOMNode(chart)).html('Stats Widget Not Configured!');
 	        } else {
-	          $.get("http://lvh.me/cgi-bin/rest/rest_retrieveData.py", { source: data.source,
+	          $.get((0, _support.dataRestPoint)(), { source: data.source,
 	            metrics: data.metrics[0],
 	            filters: fs
 	          }, function (rawData) {
@@ -18667,6 +18653,8 @@
 	exports.calculateNewLayout = calculateNewLayout;
 	exports.niceDate = niceDate;
 	exports.saveDashboard = saveDashboard;
+	exports.dataRestPoint = dataRestPoint;
+	exports.saveloadRestPoint = saveloadRestPoint;
 	// Here we assume that request is more like a rest point.
 	// Hold on - I have a rest point on my machine.
 	//
@@ -18788,12 +18776,28 @@
 
 	function saveDashboard(config) {
 	  console.log("Saving Dashboard");
-	  $.post("http://lvh.me/cgi-bin/rest/rest_saveload.py", { saveload: 'save',
-	    dashboardid: config.did,
-	    configuration: JSON.stringify(config)
-	  }, function (data, status) {
-	    // Nuttin.
-	  });
+	  if (true) {
+	    $.post(saveloadRestPoint(),
+	    //"http://lvh.me/cgi-bin/rest/rest_saveload.py",
+	    { saveload: 'save',
+	      dashboardid: config.did,
+	      configuration: JSON.stringify(config)
+	    }, function (data, status) {
+	      // Nuttin.
+	    });
+	  } else {
+	    console.log('Not really');
+	  }
+	}
+
+	function dataRestPoint() {
+	  //return("http://lvh.me/cgi-bin/rest/rest_retrieveData.py");
+	  return "http://ec2-54-213-91-179.us-west-2.compute.amazonaws.com/cgi-bin/dash_rest/rest_retrieveData.py";
+	}
+
+	function saveloadRestPoint() {
+	  //return("http://lvh.me/cgi-bin/rest/rest_saveload.py");
+	  return "http://ec2-54-213-91-179.us-west-2.compute.amazonaws.com/cgi-bin/dash_rest/rest_saveload.py";
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(61)))
 

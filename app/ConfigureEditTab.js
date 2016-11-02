@@ -69,7 +69,7 @@ const mapStateToProps = (state) => ({
 // This maps the dispatch tools, or some of them, to our props.
 
 const mapDispatchToProps = (dispatch,ownProps) => ({
-  update_dash:   (changes) => dispatch({type: 'UPDATE_DASH',changes:changes}),
+  update_dash:             (changes) => dispatch({type: 'UPDATE_DASH',changes:changes}),
   update_dash_plus_save:   (changes) => dispatch({type: 'UPDATE_DASH_PLUS_SAVE',changes:changes})
 })
 

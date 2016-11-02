@@ -170,10 +170,10 @@ const mapStateToProps = (state) => ({
 // This maps the dispatch tools, or some of them, to our props.
 
 const mapDispatchToProps = (dispatch,ownProps) => ({
-  update_widget: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET',widgetindex:widgetindex,changes:changes}),
+  update_widget:           (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET',widgetindex:widgetindex,changes:changes}),
   update_widget_plus_save: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET_PLUS_SAVE',widgetindex:widgetindex,changes:changes}),
-  update_layout: (newLayout)           => dispatch({type: 'UPDATE_LAYOUT',newLayout:newLayout}),
-  delete_widget: (widgetindex)         => dispatch({type: 'DELETE_WIDGET',widgetindex:widgetindex})
+  update_layout:           (newLayout)           => dispatch({type: 'UPDATE_LAYOUT',newLayout:newLayout}),
+  delete_widget:           (widgetindex)         => dispatch({type: 'DELETE_WIDGET',widgetindex:widgetindex})
 })
 
 ////////////////////////////////////////////////////////////////////////////////

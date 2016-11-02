@@ -8,7 +8,7 @@ import ConfigureAddTab from './ConfigureAddTab.js';
 import ConfigureEditTab from './ConfigureEditTab.js';
 var DateRangePicker = require('react-bootstrap-daterangepicker');
 var moment = require('moment');
-import {saveDashboard} from './support.js';
+import {saveDashboard,saveloadRestPoint} from './support.js';
 
 require('./dash.css');
 
@@ -28,8 +28,10 @@ class Dashboard extends React.Component {
   }
   componentDidMount() {
     var thisthis = this;
+    document.cookie = "username=John Doe";
+
     $.get(
-      "http://lvh.me/cgi-bin/rest/rest_saveload.py",
+      saveloadRestPoint(),
       {saveload: 'load',
        dashboardid: thisthis.props.fullstate.did
       },
@@ -40,6 +42,7 @@ class Dashboard extends React.Component {
   }
   componentDidUpdate(prevProps,prevState) {
     // This code would save the state on every miniscule change.
+    // Good for flushing any issues.
     //saveDashboard(this.props.fullstate);
   }
   changeCurrentTab(newTab) {
@@ -57,7 +60,7 @@ class Dashboard extends React.Component {
   datepickerUpdate(event,picker) {
     var oldDash = JSON.parse(JSON.stringify(this.props.dashLayout));
     oldDash[this.props.currentTab].tabStartDateISO = picker.startDate.toISOString();
-    oldDash[this.props.currentTab].tabEndDateISO = picker.endDate.toISOString();
+    oldDash[this.props.currentTab].tabEndDateISO   = picker.endDate.toISOString();
     this.props.update_dash_plus_save({dashLayout: oldDash});
   }
   toggleTabHideDate() {

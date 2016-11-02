@@ -6,7 +6,7 @@ var DateRangePicker = require('react-bootstrap-daterangepicker');
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {niceDate,getTimeframeRanges} from './support.js';
+import {niceDate,getTimeframeRanges,dataRestPoint} from './support.js';
 
 import WidgetConfigPie       from './WidgetConfigPie.js';
 import WidgetConfigHistogram from './WidgetConfigHistogram.js';
@@ -53,7 +53,7 @@ class Widget extends React.Component {
         $(ReactDOM.findDOMNode(chart)).html('<div class="nice-middle">Not Configured</div>');//data.type+' Widget Not Configured!');
       } else {
         $.get(
-          "http://lvh.me/cgi-bin/rest/rest_retrieveData.py",
+          dataRestPoint(),
           {source:       data.source,
            metrics:      data.metrics[0]+','+data.metrics[1],
            aggmetric:    data.metrics[0],
@@ -156,7 +156,7 @@ class Widget extends React.Component {
         $(ReactDOM.findDOMNode(chart)).html('Histogram Widget Not Configured!');
       } else {
         $.get(
-          "http://lvh.me/cgi-bin/rest/rest_retrieveData.py",
+          dataRestPoint(),
           {source:  data.source,
            metrics: data.metrics[0],
            filters: fs
@@ -230,7 +230,7 @@ class Widget extends React.Component {
         $(ReactDOM.findDOMNode(chart)).html('Scatter Widget Not Configured!');
       } else {
         $.get(
-          "http://lvh.me/cgi-bin/rest/rest_retrieveData.py",
+          dataRestPoint(),
           {source:  data.source,
            metrics: data.metrics[0]+','+data.metrics[1],
            filters: fs
@@ -303,7 +303,7 @@ class Widget extends React.Component {
             $(ReactDOM.findDOMNode(chart)).html('Stats Widget Not Configured!');
       } else {
         $.get(
-          "http://lvh.me/cgi-bin/rest/rest_retrieveData.py",
+          dataRestPoint(),
           {source:  data.source,
            metrics: data.metrics[0],
            filters: fs
@@ -498,8 +498,8 @@ const mapStateToProps = (state) => ({
 // This maps the dispatch tools, or some of them, to our props.
 
 const mapDispatchToProps = (dispatch) => ({
-  add_widget:    ()                    => dispatch({type: 'ADD_WIDGET',    data:{type:'pie'}}),
-  update_widget: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET', widgetindex:widgetindex,changes:changes}),
+  add_widget:              ()                    => dispatch({type: 'ADD_WIDGET',    data:{type:'pie'}}),
+  update_widget:           (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET', widgetindex:widgetindex,changes:changes}),
   update_widget_plus_save: (widgetindex,changes) => dispatch({type: 'UPDATE_WIDGET_PLUS_SAVE',widgetindex:widgetindex,changes:changes})
 })
 
